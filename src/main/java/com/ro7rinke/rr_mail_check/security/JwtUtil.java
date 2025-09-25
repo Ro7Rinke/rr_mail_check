@@ -1,28 +1,33 @@
-// com.ro7rinke.rr_mail_check.security.JwtUtil
 package com.ro7rinke.rr_mail_check.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import jakarta.annotation.PostConstruct;
 import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
 
-    private final Key key;
+    private Key key;
 
-    public JwtUtil() {
-        String secret = System.getProperty("JWT_SECRET");
-        byte[] keyBytes = secret.getBytes();
-        this.key = Keys.hmacShaKeyFor(java.util.Arrays.copyOf(keyBytes, Math.max(32, keyBytes.length)));
+    @Value("${jwt.secret:default_super_secret_key_please_change}")
+    private String secret;
+
+    @Value("${jwt.expiration:86400000}") // default 24h
+    private long expirationMs;
+
+    @PostConstruct
+    public void init() {
+        byte[] keyBytes = java.util.Arrays.copyOf(secret.getBytes(), Math.max(32, secret.getBytes().length));
+        this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String generateToken(String username, String role) {
         Date now = new Date();
-        // 24h
-        long expirationMs = 1000L * 60 * 60 * 24;
         Date exp = new Date(now.getTime() + expirationMs);
 
         return Jwts.builder()
