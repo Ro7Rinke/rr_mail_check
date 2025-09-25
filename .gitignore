@@ -51,3 +51,5 @@ jwt.key
 ### Spring Boot ###
 # Exclude generated files
 spring.log
+
+disposable_domains.csv
