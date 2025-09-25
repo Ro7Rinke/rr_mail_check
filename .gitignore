@@ -1,26 +1,53 @@
-# Compiled class file
+### Java ###
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
-*.nar
 *.ear
-*.zip
-*.tar.gz
-*.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Logs
+*.log
+logs/
+!src/main/resources/logback-spring.xml
 
+# OS junk
+.DS_Store
+Thumbs.db
+
+### Maven ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/maven-wrapperDownloader.java
+
+### Gradle ###
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+gradle-app.setting
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+### Eclipse ###
+.project
+.classpath
+.settings/
+bin/
+
+### VS Code ###
+.vscode/
+
+### Environment / Config ###
 .env
+application-*.yml
+application-*.properties
+secret.key
+jwt.key
+
+### Spring Boot ###
+# Exclude generated files
+spring.log
